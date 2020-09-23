@@ -30,6 +30,7 @@ function Add {
 
     Write-Output "Mapping $ip to $name"
     Add-Content -Path $hosts_path -Value "$ip`t$name"
+    ipconfig /flushdns
     Write-Output "Done! hosts content:"
     Write-Output (Get-Content -Path $hosts_path)
 }
@@ -60,6 +61,7 @@ function RemoveByName {
 
     Write-Output "Removing $name"
     Set-Content -Path $hosts_path -Value (Select-String -Path $hosts_path -Pattern "^\s*$ip_pattern\s+$name\s*$" -NotMatch).Line
+    ipconfig /flushdns
     Write-Output "Done! hosts content:"
     Write-Output (Get-Content -Path $hosts_path)
 }
@@ -75,6 +77,7 @@ function RemoveByIp {
     Write-Output "Removing $ip"
     $ip = $ip.Trim().Replace(".", "\.")
     Set-Content -Path $hosts_path -Value (Select-String -Path $hosts_path -Pattern "^\s*$ip\s+\w+\s*$" -NotMatch).Line
+    ipconfig /flushdns
     Write-Output "Done! hosts content:"
     Write-Output (Get-Content -Path $hosts_path)
 }

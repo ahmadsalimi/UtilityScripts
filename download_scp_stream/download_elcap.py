@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from requests_html import HTMLSession
+import requests as R
 from urllib.parse import urljoin
 import functions as F
 import sys
@@ -9,7 +9,7 @@ import warnings
 def get_all_forms(response):
     # for javascript driven website
     # res.html.render()
-    soup = BeautifulSoup(response.html.html, "html.parser")
+    soup = BeautifulSoup(response.content, "html.parser")
     return soup.find_all("form")
 
 
@@ -52,10 +52,10 @@ def submit_download_form(session, url, form_details, hcode, hname, sel):
 
     url = urljoin(url, form_details["action"])
 
-    return session.post(url, data=data)
+    return session.post(url, data=data, verify=False, stream=True)
 
 def get_response(subset):
-    session = HTMLSession()
+    session = R.Session()
     url = "https://veet.via.cornell.edu/lungdb.html"
 
     # LOG IN

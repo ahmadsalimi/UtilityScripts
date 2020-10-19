@@ -2,3 +2,4 @@ tqdm
 requests
 cryptography==2.8
 paramiko==2.1.0
+bs4

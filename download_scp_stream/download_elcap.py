@@ -85,7 +85,7 @@ def get_response(subset):
 
 warnings.filterwarnings('ignore')
 
-if len(sys.argv) is not 6:
+if len(sys.argv) != 6:
     raise Exception(
         "Usage: python download_elcap.py subset server_address username password path")
 

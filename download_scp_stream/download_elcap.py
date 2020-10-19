@@ -44,14 +44,7 @@ def get_form_details(form):
 def submit_download_form(session, url, form_details, hcode, hname, sel):
     data = {}
     for input_tag in form_details["inputs"]:
-        if input_tag["type"] == "hidden":
-            # if it's hidden, use the default value
-            data[input_tag["name"]] = input_tag["value"]
-        elif input_tag["type"] != "submit":
-            # all others except submit, prompt the user to set it
-            value = input(
-                f"Enter the value of the field '{input_tag['name']}' (type: {input_tag['type']}): ")
-            data[input_tag["name"]] = value
+        data[input_tag["name"]] = input_tag["value"]
 
     data['help'] = hcode
     data['title'] = hname

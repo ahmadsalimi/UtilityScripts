@@ -1,7 +1,7 @@
 from paramiko import SSHClient
 from tqdm import tqdm
 
-def sftp_connect(server:str, username:str=None, password:str=None):
+def sftp_connect(server, username=None, password=None):
     ssh = SSHClient()
     ssh.load_system_host_keys()
     ssh.connect(server, username=username, password=password)

@@ -1,6 +1,9 @@
 from bs4 import BeautifulSoup
 import requests as R
-from urllib.parse import urljoin
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin
 import functions as F
 import sys
 import warnings

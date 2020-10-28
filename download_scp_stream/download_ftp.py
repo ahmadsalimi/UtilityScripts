@@ -8,6 +8,26 @@ import os
 
 warnings.filterwarnings('ignore')
 
+not_to_download = [
+    "LIDC-IDRI-0001",
+    "LIDC-IDRI-0004",
+    "LIDC-IDRI-0007",
+    "LIDC-IDRI-0010",
+    "LIDC-IDRI-0013",
+    "LIDC-IDRI-0016",
+    "LIDC-IDRI-0002",
+    "LIDC-IDRI-0005",
+    "LIDC-IDRI-0008",
+    "LIDC-IDRI-0011",
+    "LIDC-IDRI-0014",
+    "LIDC-IDRI-0017",
+    "LIDC-IDRI-0003",
+    "LIDC-IDRI-0006",
+    "LIDC-IDRI-0009",
+    "LIDC-IDRI-0012",
+    "LIDC-IDRI-0015",
+    "LIDC-IDRI-0018"
+]
 
 def _is_ftp_dir(ftp, name, guess_by_extension=True):
     """ simply determines if an item listed on the ftp server is a valid directory or not """
@@ -58,6 +78,10 @@ def _download_ftp_file(ftp, ftp_path, sftp, sftp_path):
 
 
 def _mirror_ftp_dir(ftp, ftp_path, sftp, sftp_path):
+    if ftp_path.split('/')[-1] in not_to_download:
+        print('skipping ' + ftp_path)
+        return
+        
     for item in ftp.nlst(ftp_path):
         destination = sftp_path + '/' + item.split('/')[-1]
         if _is_ftp_dir(ftp, item, True):

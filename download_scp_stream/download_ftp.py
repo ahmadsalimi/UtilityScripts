@@ -83,7 +83,7 @@ def _mirror_ftp_dir(ftp, ftp_path, sftp, sftp_path):
 
     for item in ftp.nlst(ftp_path):
         destination = sftp_path + '/' + item.split('/')[-1]
-        if _is_ftp_dir(ftp, item, True):
+        if _is_ftp_dir(ftp, item, False):
             _mirror_ftp_dir(ftp, item, sftp, destination)
         else:
             _download_ftp_file(ftp, item, sftp, destination)

@@ -25,8 +25,7 @@ not_to_download = [
     "LIDC-IDRI-0006",
     "LIDC-IDRI-0009",
     "LIDC-IDRI-0012",
-    "LIDC-IDRI-0015",
-    "LIDC-IDRI-0018"
+    "LIDC-IDRI-0015"
 ]
 
 def _is_ftp_dir(ftp, name, guess_by_extension=True):
@@ -81,7 +80,7 @@ def _mirror_ftp_dir(ftp, ftp_path, sftp, sftp_path):
     if ftp_path.split('/')[-1] in not_to_download:
         print('skipping ' + ftp_path)
         return
-        
+
     for item in ftp.nlst(ftp_path):
         destination = sftp_path + '/' + item.split('/')[-1]
         if _is_ftp_dir(ftp, item, True):
